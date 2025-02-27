@@ -1,6 +1,6 @@
 # Define library
 add_library(TMC4671
-        TMC4671.c
+        TMC4671.cpp
         TMC4671.h
         TMC4671_HW_Abstraction.h
 )

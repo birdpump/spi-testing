@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdint.h>
 #include "pico/stdlib.h"
 #include "hardware/spi.h"
 
@@ -31,7 +32,7 @@ int main() {
 
 
     // SPI initialisation. This example will use SPI at 1MHz.
-    spi_init(SPI_PORT, 1000 * 1000);
+    spi_init(SPI_PORT, 100 * 1000);
     gpio_set_function(PIN_MISO, GPIO_FUNC_SPI);
     gpio_set_function(PIN_CS, GPIO_FUNC_SIO);
     gpio_set_function(PIN_SCK, GPIO_FUNC_SPI);
@@ -45,6 +46,10 @@ int main() {
     while (true) {
         sleep_ms(3000);
 
-        tmc4671_switchToMotionMode(DEFAULT_ICID, TMC4671_MOTION_MODE_POSITION);
+        printf("Sending SPI Request \n");
+
+        uint32_t test = tmc4671_getTargetTorque_raw(DEFAULT_ICID);
+
+        printf("Target Torque : %d\n", test);
     }
 }
